@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 
-const FilterForm = ( { filterValue, setFilterValue, setListData } ) => {
+const FilterForm = ( { filterValue, setFilterValue, setListData, resetFilters } ) => {
 
    function sendForm (event) {
       axios.get('https://api.punkapi.com/v2/beers', {
@@ -21,9 +21,9 @@ const FilterForm = ( { filterValue, setFilterValue, setListData } ) => {
                   <div className="filter-form__block1">
                      <div className="filter-form__group"> 
                         <label htmlFor="abv_gt">ABV from </label> <br />
-                        <input id="abv_gt" type="number" min="0.5" max="54" placeholder="0.5" step="0.1" onChange={((e) => setFilterValue({...filterValue, abv_gt : e.target.value}))}/>
+                        <input id="abv_gt" type="number" min="3.5" max="54" placeholder="3.5" step="0.1" onChange={((e) => setFilterValue({...filterValue, abv_gt : e.target.value}))}/>
                         <label htmlFor="abv_lt"> to </label>
-                        <input id="abv_lt" type="number" min="0.5" max="55" placeholder="55" step="0.1" onChange={((e) => setFilterValue({...filterValue, abv_lt : e.target.value}))}/>
+                        <input id="abv_lt" type="number" min="3.5" max="55" placeholder="55" step="0.1" onChange={((e) => setFilterValue({...filterValue, abv_lt : e.target.value}))}/>
                      </div>
                      <div className="filter-form__group"> 
                         <label htmlFor="ibu_gt">IBU from </label> <br />
@@ -72,7 +72,10 @@ const FilterForm = ( { filterValue, setFilterValue, setListData } ) => {
                      </div>
                   </div>
                </div>
-               <button onClick={(e) => sendForm(e)}>Filter</button>
+               <div className="form-buttons">
+                  <button onClick={(e) => sendForm(e)}>Filter</button>
+                  <button type="reset" onClick={resetFilters}>Reset all</button>
+               </div>
             </form>
          </fieldset>
       </div>
