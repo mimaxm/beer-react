@@ -117,24 +117,20 @@ ul {
    padding: 20px;
    margin-bottom: 30px;
    background-color: rgb(238, 238, 238);
-
    &__img {
       height: 200px;
       width: fit-content;
       margin: 0 auto 20px;
    }
-
    &__title {
       font-size: 26px;
       font-weight: 700;
       margin-bottom: 10px;
       text-align: center;
    }
-
    &__descr {
       text-align: justify;
    }
-
    &__small {
       font-weight: 400;
       line-height: 200%;
@@ -142,7 +138,6 @@ ul {
       background-color: #f06e6e;
       margin-right: 5px;
    }
-
    p {
       margin-bottom: 5px;
    }
@@ -150,4 +145,22 @@ ul {
 
 .search-result {
    color:rgb(238, 238, 238);
+}
+
+.pagination {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 20px;
+   &__button {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+   }
+   &__button-current {
+      width: 35px;
+      height: 35px;
+      font-weight: 700;
+      background: rgb(223, 223, 223);
+   }
 }

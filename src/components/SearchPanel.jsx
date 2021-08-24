@@ -1,6 +1,6 @@
 import debounce from "../utils/debounce";
 
-function SearchPanel({ searchValue, setSearchValue }) {
+function SearchPanel({ setSearchValue }) {
 
   function onChange(e) {
     return setSearchValue(e.target.value);

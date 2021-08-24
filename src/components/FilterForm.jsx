@@ -1,10 +1,10 @@
 import axios from 'axios';
 import moment from 'moment';
 
-const FilterForm = ( { filterValue, setFilterValue, setListData, resetFilters } ) => {
+const FilterForm = ( { baseUrl, filterValue, setFilterValue, setListData, resetFilters } ) => {
 
    function sendForm (event) {
-      axios.get('https://api.punkapi.com/v2/beers', {
+      axios.get(baseUrl, {
          params: {...filterValue}
       })
          .then(beerData => setListData(beerData.data))
@@ -21,21 +21,21 @@ const FilterForm = ( { filterValue, setFilterValue, setListData, resetFilters } 
                   <div className="filter-form__block1">
                      <div className="filter-form__group"> 
                         <label htmlFor="abv_gt">ABV from </label> <br />
-                        <input id="abv_gt" type="number" min="3.5" max="54" placeholder="3.5" step="0.1" onChange={((e) => setFilterValue({...filterValue, abv_gt : e.target.value}))}/>
+                        <input id="abv_gt" type="number" min="0.4" max="55" placeholder="0.4" step="0.5" onChange={((e) => setFilterValue({...filterValue, abv_gt : e.target.value}))}/>
                         <label htmlFor="abv_lt"> to </label>
-                        <input id="abv_lt" type="number" min="3.5" max="55" placeholder="55" step="0.1" onChange={((e) => setFilterValue({...filterValue, abv_lt : e.target.value}))}/>
+                        <input id="abv_lt" type="number" min="0.5" max="56" placeholder="56" step="0.5" onChange={((e) => setFilterValue({...filterValue, abv_lt : e.target.value}))}/>
                      </div>
                      <div className="filter-form__group"> 
                         <label htmlFor="ibu_gt">IBU from </label> <br />
-                        <input id="ibu_gt" type="number" min="25" max="150" placeholder="25" step="5" onChange={((e) => setFilterValue({...filterValue, ibu_gt : e.target.value}))}/>
+                        <input id="ibu_gt" type="number" min="5" max="155" placeholder="5" step="5" onChange={((e) => setFilterValue({...filterValue, ibu_gt : e.target.value}))}/>
                         <label htmlFor="ibu_lt"> to </label>
-                        <input id="ibu_lt" type="number" min="30" max="150" placeholder="150" step="5" onChange={((e) => setFilterValue({...filterValue, ibu_lt : e.target.value}))}/>
+                        <input id="ibu_lt" type="number" min="5" max="155" placeholder="155" step="5" onChange={((e) => setFilterValue({...filterValue, ibu_lt : e.target.value}))}/>
                      </div>
                      <div className="filter-form__group"> 
                         <label htmlFor="ebc_gt">EBC from </label> <br />
-                        <input id="ebc_gt" type="number" min="5" max="215" placeholder="5" step="10" onChange={((e) => setFilterValue({...filterValue, ebc_gt : e.target.value}))}/>
+                        <input id="ebc_gt" type="number" min="5" max="405" placeholder="5" step="10" onChange={((e) => setFilterValue({...filterValue, ebc_gt : e.target.value}))}/>
                         <label htmlFor="ebc_lt"> to </label>
-                        <input id="ebc_lt" type="number" min="10" max="220" placeholder="220" step="10" onChange={((e) => setFilterValue({...filterValue, ebc_lt : e.target.value}))}/>
+                        <input id="ebc_lt" type="number" min="5" max="405" placeholder="405" step="10" onChange={((e) => setFilterValue({...filterValue, ebc_lt : e.target.value}))}/>
                      </div>
                      <div className="filter-form__group"> 
                         <label htmlFor="brewed_after">Brewed from </label> 

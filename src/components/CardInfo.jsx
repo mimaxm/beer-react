@@ -9,7 +9,7 @@ const CardInfo = ({ item }) => {
          <span className="card-block__small">PH: {item.ph}</span>
          <span className="card-block__small">SRM: {item.srm}</span> 
          <p className="small-text">
-            Food pairing: {item.food_pairing.map(el => <span className="card-block__small">{el}</span>)}
+            Food pairing: {item.food_pairing.map(el => <span key={el} className="card-block__small">{el}</span>)}
          </p>
          <p className="small-text">
             First brewed: <span className="card-block__small">{item.first_brewed}</span>
