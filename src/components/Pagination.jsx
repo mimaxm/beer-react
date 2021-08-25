@@ -1,0 +1,42 @@
+import { getPageCount, getPagesArray } from './../utils/pagesUtils';
+
+const Pagination = ( { page, setPage, limitPerPage, setLimitPerPage, totalPage}) => {
+
+   const pagesArray = getPagesArray(totalPage);
+
+   function nextPage () {
+      if (page !== getPageCount(limitPerPage)) {
+         setPage(page + 1);
+      } 
+   }
+
+   function prevPage () {
+      if (page !== 1) {
+         setPage(page - 1);
+      } 
+   }
+   
+   function changeOption (event) {
+      setLimitPerPage(event.target.value);
+   }
+
+   return (
+      <div className="pagination">
+         <div className="pagination__pages">
+         {pagesArray.map(p => <button key={p} onClick={() => setPage(p)} className={page === p ? 'pagination__button-current' : 'pagination__button'}>{p}</button>)}
+         </div>
+         <div>
+            <button onClick={prevPage}>Prev Page</button>
+            <button onClick={nextPage}>Next Page</button>
+            <select name="limit-per-page" onChange={(e) => changeOption(e)}>
+               <option value="20" >20 cards per page</option>
+               <option value="40">40 cards</option>
+               <option value="60">60 cards</option>
+               <option value="80">80 cards</option>
+            </select>
+         </div>
+      </div>
+   )
+}
+
+export default Pagination;

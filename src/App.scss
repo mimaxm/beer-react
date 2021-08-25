@@ -20,6 +20,28 @@ ul {
    list-style: none;
 }
 
+button {
+   text-align: center;
+   text-decoration: none;
+   font-weight: 700;
+   padding: 3px 6px;
+   background: #eaeef1;
+   width: 120px;
+   height: 40px;
+   margin: 20px;
+   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.1));
+   border-radius: 5px;
+   color: rgba(0,0,0,.6);
+   text-shadow: 0 1px 1px rgba(255,255,255,.7);
+   box-shadow: 0 0 0 1px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2), inset 0 1px 2px rgba(255,255,255,.7);
+   cursor: pointer;
+   &:hover {
+      background: #fff;
+      text-shadow: none;
+      box-shadow: none;
+   }
+}
+
 .container {
    max-width: 1220px;
    padding: 30px 10px;
@@ -71,28 +93,6 @@ ul {
    .form-buttons {
       display: flex;
       justify-content: center;
-   }
-   button {
-      text-align: center;
-      display: block;
-      text-decoration: none;
-      font-weight: 700;
-      padding: 3px 6px;
-      background: #eaeef1;
-      width: 120px;
-      height: 40px;
-      margin: 20px;
-      background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.1));
-      border-radius: 5px;
-      color: rgba(0,0,0,.6);
-      text-shadow: 0 1px 1px rgba(255,255,255,.7);
-      box-shadow: 0 0 0 1px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2), inset 0 1px 2px rgba(255,255,255,.7);
-      cursor: pointer;
-      &:hover {
-         background: #fff;
-         text-shadow: none;
-         box-shadow: none;
-      }
    }
 }
 
@@ -159,12 +159,13 @@ ul {
    &__button {
       width: 30px;
       height: 30px;
-      cursor: pointer;
+      margin: 0;
    }
    &__button-current {
       width: 35px;
       height: 35px;
       font-weight: 700;
       background: rgb(223, 223, 223);
+      margin: 0;
    }
 }

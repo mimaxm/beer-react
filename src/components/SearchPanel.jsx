@@ -1,9 +1,11 @@
 import debounce from "../utils/debounce";
 
-function SearchPanel({ setSearchValue }) {
+function SearchPanel({ setSearchValue, setTotalPage, getPageCount, filteredData }) {
 
   function onChange(e) {
-    return setSearchValue(e.target.value);
+    setSearchValue(e.target.value);
+    // setTotalPage(getPageCount(filteredData.length));
+    // console.log(filteredData.length)
   }
 
   const onChangeDebounced = debounce(onChange, 200);

@@ -1,11 +1,12 @@
 import './App.scss';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { getPageCount, getPagesArray } from './utils/pagesUtils';
+import { getPageCount } from './utils/pagesUtils';
 import CardsList from './components/CardsList';
 import Card from './components/Card';
 import SearchPanel from './components/SearchPanel';
 import FilterForm from './components/FilterForm';
+import Pagination from './components/Pagination';
 
 function App() {
   const [listData, setListData] = useState([]);
@@ -13,9 +14,7 @@ function App() {
   const [filterValue, setFilterValue] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
-  const [limitPerPage, setLimitPerPage] = useState(8);
-
-  const pagesArray = getPagesArray(totalPage);
+  const [limitPerPage, setLimitPerPage] = useState(20);
 
   const filteredData = listData.filter((item) => {
     return item.name.toLowerCase().includes(searchValue.toLowerCase());
@@ -32,7 +31,7 @@ function App() {
     })
       .then(beerData => setListData(beerData.data))
       .catch(err => console.log(err));
-      setTotalPage(getPageCount(limitPerPage))
+      setTotalPage(getPageCount(limitPerPage));
   }, [page, limitPerPage, setPage]);
 
   function resetFilters () {
@@ -44,28 +43,14 @@ function App() {
   const visibleData = (filteredData.map(item => (<Card key={item.id} item={item}/>)));
   const errNotFound = <h2 className="search-result">"{searchValue}" - was not found</h2>;
 
-  function changeOption (event) {
-    setLimitPerPage(event.target.value);
-  }
+
 
   return (
     <div className='container'>
-      <SearchPanel setSearchValue={setSearchValue}/>
+      <SearchPanel setSearchValue={setSearchValue} setTotalPage={setTotalPage} getPageCount={getPageCount} filteredData={filteredData}/>
       <FilterForm baseUrl={baseUrl} resetFilters={resetFilters} filterValue={filterValue} setFilterValue={setFilterValue} setListData={setListData}/>
+      <Pagination page={page} setPage={setPage} limitPerPage={limitPerPage} setLimitPerPage={setLimitPerPage} totalPage={totalPage}/>
       
-      <div className="pagination">
-        <div className="pagination__pages">
-        {pagesArray.map(p => <button key={p} onClick={() => setPage(p)} className={page === p ? 'pagination__button-current' : 'pagination__button'}>{p}</button>)}
-        </div>
-        <div>
-          <select name="limit-per-page" onChange={(e) => changeOption(e)}>
-            <option value="8" >8 cards per page</option>
-            <option value="10">10 cards</option>
-            <option value="20">20 cards</option>
-            <option value="50">50 cards</option>
-          </select>
-        </div>
-      </div>
       
       <CardsList filteredData={filteredData} visibleData={visibleData} errNotFound={errNotFound}/>
     </div>
