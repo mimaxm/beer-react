@@ -1,10 +1,11 @@
 import axios from 'axios';
 import moment from 'moment';
+import { BASE_URL } from '../utils/pagesUtils';
 
-const FilterForm = ( { baseUrl, filterValue, setFilterValue, setListData, resetFilters } ) => {
+const FilterForm = ( { filterValue, setFilterValue, setListData, resetFilters } ) => {
 
    function sendForm (event) {
-      axios.get(baseUrl, {
+      axios.get(BASE_URL, {
          params: {...filterValue}
       })
          .then(beerData => setListData(beerData.data))

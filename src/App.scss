@@ -1,6 +1,6 @@
 html {
    box-sizing: border-box;
-   background-color: #333333;
+   background-color: #630070;
 }
 
 *,
@@ -26,12 +26,12 @@ button {
    font-weight: 700;
    padding: 3px 6px;
    background: #eaeef1;
-   width: 120px;
+   width: 100px;
    height: 40px;
    margin: 20px;
    background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.1));
    border-radius: 5px;
-   color: rgba(0,0,0,.6);
+   color: rgba(0,0,0,.7);
    text-shadow: 0 1px 1px rgba(255,255,255,.7);
    box-shadow: 0 0 0 1px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2), inset 0 1px 2px rgba(255,255,255,.7);
    cursor: pointer;
@@ -42,11 +42,33 @@ button {
    }
 }
 
+.prev-next-buttons {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
 .container {
    max-width: 1220px;
    padding: 30px 10px;
    margin: 0 auto;
 }
+
+.page-wrapper {
+   -webkit-animation-name: fadeIn;
+   animation-name: fadeIn;
+   -webkit-animation-duration: 1.5s;
+   animation-duration: 1.5s;
+   -webkit-animation-fill-mode: both;
+   animation-fill-mode: both;
+   }
+   @-webkit-keyframes fadeIn {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
+   }
+   @keyframes fadeIn {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
+   } 
 
 .cards-list {
    display: flex;
@@ -82,6 +104,10 @@ button {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
+      @media screen and (max-width: 550px) {
+         flex-direction: column;
+         align-items: center;
+      }
    }
    &__group {
       margin-bottom: 10px;
@@ -89,15 +115,27 @@ button {
    &__block1 {
       width: 330px;
       margin-right: 50px;
+      @media screen and (max-width: 550px) {
+         margin-right: 0;
+         width: fit-content;
+      }
    }
    .form-buttons {
       display: flex;
       justify-content: center;
+      button {
+         @media screen and (max-width: 550px) {
+            margin: 15px;
+         }
+      }
    }
 }
 
 .filter-fieldset {
    padding: 20px;
+   @media screen and (max-width: 550px) {
+      padding: 10px 5px;
+   }
    legend {
       font-weight: 700;
       padding: 0 5px;
@@ -105,6 +143,9 @@ button {
    input {
       width: 150px;
       height: 26px;
+      @media screen and (max-width: 550px) {
+         width: 100px;
+      }
    }
 }
 
@@ -140,6 +181,10 @@ button {
    }
    p {
       margin-bottom: 5px;
+   }
+
+   @media screen and (max-width: 1130px) {
+      height: fit-content;
    }
 }
 

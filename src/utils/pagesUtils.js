@@ -1,3 +1,5 @@
+const BASE_URL = 'https://api.punkapi.com/v2/beers';
+
 const totalCount = 325;
 
 const getPageCount = (limitPerPage) => {
@@ -9,8 +11,8 @@ const getPagesArray = (totalPage) => {
    for (let i = 1; i < totalPage + 1; i++) {
       resultArr.push(i);
    }
-   console.log(resultArr.length);
    return resultArr;
 }
 
-   export {getPageCount, getPagesArray};
+
+   export {BASE_URL, getPageCount, getPagesArray};

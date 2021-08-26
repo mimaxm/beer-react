@@ -1,4 +1,4 @@
-const CardsList = ({ filteredData, visibleData, errNotFound }) => {
+const CardsList = ({ visibleData }) => {
 
    return (
       <> 

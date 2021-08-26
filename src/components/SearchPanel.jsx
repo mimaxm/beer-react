@@ -1,14 +1,12 @@
 import debounce from "../utils/debounce";
 
-function SearchPanel({ setSearchValue, setTotalPage, getPageCount, filteredData }) {
+function SearchPanel({ setSearchValue }) {
 
   function onChange(e) {
     setSearchValue(e.target.value);
-    // setTotalPage(getPageCount(filteredData.length));
-    // console.log(filteredData.length)
   }
 
-  const onChangeDebounced = debounce(onChange, 200);
+  const onChangeDebounced = debounce(onChange, 250);
 
   return (
     <div className="search-bar">

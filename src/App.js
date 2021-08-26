@@ -1,12 +1,13 @@
 import './App.scss';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { getPageCount } from './utils/pagesUtils';
+import { getPageCount, BASE_URL } from './utils/pagesUtils';
+import getData from './utils/getData';
 import CardsList from './components/CardsList';
-import Card from './components/Card';
+import Card from './components/CardItem/Card';
 import SearchPanel from './components/SearchPanel';
 import FilterForm from './components/FilterForm';
-import Pagination from './components/Pagination';
+import Pagination from './components/Pagination/Pagination';
+import PrevNextButtons from './components/Pagination/PrevNextButtons';
 import { Loader } from './components/Loader';
 
 function App() {
@@ -18,49 +19,55 @@ function App() {
   const [limitPerPage, setLimitPerPage] = useState(20);
   const [isLoading, setLoading] = useState();
 
-  const filteredData = listData.filter((item) => {
-    return item.name.toLowerCase().includes(searchValue.trim().toLowerCase());
-  });
-
-  const baseUrl = 'https://api.punkapi.com/v2/beers';
-
   useEffect(() => {
     setLoading(true);
-    axios.get(baseUrl, {
-      params: {
-        page: page,
-        per_page: limitPerPage,
-      }
-    })
-      .then(beerData => setListData(beerData.data))
-      .catch(err => console.log(err));
-      setTotalPage(getPageCount(limitPerPage));
-      setLoading(false);
-  }, [page, limitPerPage, setPage]);
+    let fetchUrl;
+    const searchUrl = `${BASE_URL}?beer_name=${searchValue}`;
+    searchValue ? fetchUrl = searchUrl : fetchUrl = BASE_URL;
+
+    getData(fetchUrl, page, limitPerPage, setListData);
+
+    setTotalPage(getPageCount(limitPerPage));
+    setLoading(false);
+  }, [searchValue, page, limitPerPage]);
 
   function resetFilters () {
-    axios.get(baseUrl)
-      .then(beerData => setListData(beerData.data))
-      .catch(err => console.log(err));
+    getData(BASE_URL, page, limitPerPage, setListData);
   }
 
-  const visibleData = (filteredData.map(item => (<Card key={item.id} item={item}/>)));
-  const errNotFound = <h2 className="search-result">No results found :(</h2>;
+  const visibleData = listData.map(item => (<Card key={item.id} item={item}/>));
 
-
+  const pageCompopents = (
+    <div className="page-wrapper"> 
+      <FilterForm 
+        resetFilters={resetFilters} 
+        filterValue={filterValue} 
+        setFilterValue={setFilterValue} 
+        setListData={setListData}
+      />
+      <PrevNextButtons 
+        page={page} 
+        setPage={setPage} 
+        limitPerPage={limitPerPage} 
+        setLimitPerPage={setLimitPerPage}  
+        />
+      <CardsList 
+        visibleData={visibleData} 
+      />
+      <Pagination 
+        page={page} 
+        setPage={setPage} 
+        totalPage={totalPage}
+      />
+    </div>
+  )
 
   return (
     <div className='container'>
-      <SearchPanel setSearchValue={setSearchValue} setTotalPage={setTotalPage} getPageCount={getPageCount} filteredData={filteredData}/>
-      {isLoading === false 
-      ?
-      <> 
-        <FilterForm baseUrl={baseUrl} resetFilters={resetFilters} filterValue={filterValue} setFilterValue={setFilterValue} setListData={setListData}/>
-        <Pagination page={page} setPage={setPage} limitPerPage={limitPerPage} setLimitPerPage={setLimitPerPage} totalPage={totalPage}/>
-        <CardsList filteredData={filteredData} visibleData={visibleData} errNotFound={errNotFound}/>
-      </>
-      : 
-      <Loader />}
+      <SearchPanel 
+        setSearchValue={setSearchValue} 
+      />
+      {isLoading === false ? pageCompopents : <Loader />}
     </div>
   );
 }
