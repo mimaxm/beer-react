@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.punkapi.com/v2/beers';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const totalCount = 325;
 
@@ -14,5 +14,8 @@ const getPagesArray = (totalPage) => {
    return resultArr;
 }
 
-
-   export {BASE_URL, getPageCount, getPagesArray};
+export {
+   BASE_URL,
+   getPageCount,
+   getPagesArray
+};

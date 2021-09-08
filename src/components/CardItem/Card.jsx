@@ -1,6 +1,6 @@
 import CardInfo from "./CardInfo"
 
-const Card = ( {item} ) => {
+const Card = ({ item }) => {
    return (
       <div className='card-block'>
          <img 

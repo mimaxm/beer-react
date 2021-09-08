@@ -21,9 +21,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    let fetchUrl;
-    const searchUrl = `${BASE_URL}?beer_name=${searchValue}`;
-    searchValue ? fetchUrl = searchUrl : fetchUrl = BASE_URL;
+    const fetchUrl = searchValue ? `${BASE_URL}beers/?beer_name=${searchValue}` : `${BASE_URL}beers/`
 
     getData(fetchUrl, page, limitPerPage, setListData);
 
@@ -50,7 +48,7 @@ function App() {
         setPage={setPage} 
         limitPerPage={limitPerPage} 
         setLimitPerPage={setLimitPerPage}  
-        />
+      />
       <CardsList 
         visibleData={visibleData} 
       />
@@ -67,7 +65,7 @@ function App() {
       <SearchPanel 
         setSearchValue={setSearchValue} 
       />
-      {isLoading === false ? pageCompopents : <Loader />}
+      {isLoading ? <Loader /> : pageCompopents }
     </div>
   );
 }

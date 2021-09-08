@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getData = (fetchUrl, page, limitPerPage, setListData) => {
-   axios.get(fetchUrl, {
+   axios.get(`${fetchUrl}`, {
       params: {
          page: page,
          per_page: limitPerPage,
